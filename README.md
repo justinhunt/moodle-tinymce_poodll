@@ -1,4 +1,4 @@
-moodle-tinymce_poodll
-=====================
+PoodLL Anywhere
+==========
 
-PoodLL TinyMCE plugin for Moodle
+The Moodle PoodLL Anywhere plugin for TinyMCE
