@@ -12,28 +12,56 @@
 	tinymce.create('tinymce.plugins.poodllPlugin', {
 		init : function(ed, url) {
 			this.editor = ed;
+			
+			 /** Borrowed from Wan's mod */
+            var formtextareaid = tinyMCE.activeEditor.id.substr(3);
+            var itemidname = '';
+            var formtextareatmp = formtextareaid.split("_");
+            if (formtextareatmp.length == 2 && !isNaN(formtextareatmp[1])) {
+                itemidname = formtextareatmp[0] + '[' + formtextareatmp[1] + '][itemid]';
+            }
+            else {
+                itemidname = formtextareaid + '[itemid]';
+            }
+            var itemid = window.top.document.getElementsByName(itemidname).item(0);
+            if (itemid!=null)
+            {
+                itemid = itemid.value;
+            }
+            /** end **/
+			
+			var recorders = Array('audiomp3','audiored5','video', 'whiteboard','snapshot');
+			var widths = Array(540,540,540,600,540);
+			var heights = Array(480,480,480,500,480);
+			
+			for (var therecorder = 0; therecorder < recorders.length; therecorder++) {
 
-			// Register commands
-			ed.addCommand('mcepoodll', function() {
+				// Register commands
+				ed.addCommand('mcepoodll'+recorders[therecorder], 
+					function(rec,wid,hei) {
+						return function(){
+							ed.windowManager.open({
+								file : ed.getParam("moodle_plugin_base") + 'poodll/tinymce/poodll.php?itemid='+itemid + '&recorder=' + rec,
+								width : wid,
+								height : hei,
+								inline : 1
+							}, {
+								plugin_url : url
+							});
+						}
+					}(recorders[therecorder],widths[therecorder],heights[therecorder])
+				);
 
-				ed.windowManager.open({
-					file : url + '/poodll.htm',
-					width : 480,
-					height : 400 ,
-					inline : 1
-				}, {
-					plugin_url : url
+				// Register buttons
+				ed.addButton('poodll'+recorders[therecorder] ,{
+					title : 'poodll.' + recorders[therecorder] + '_desc',
+					cmd : 'mcepoodll' + recorders[therecorder],
+					image: url + '/img/' + recorders[therecorder] + '_icon.png'
 				});
-			});
-
-			// Register buttons
-			ed.addButton('poodll', {
-				title : 'poodll.desc',
-				cmd : 'mcepoodll',
-				image: url + '/img/icon.png'
-			});
-			//you could add a shortcut here
-			//ed.addShortcut('ctrl+k', 'poodll.poodll_desc', 'mcepoodll');
+				//you could add a shortcut here
+				//ed.addShortcut('ctrl+k', 'poodll.poodll_desc', 'mcepoodll');
+			
+			}
 
 		
 		},

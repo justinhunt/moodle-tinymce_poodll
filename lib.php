@@ -25,7 +25,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class tinymce_poodll extends editor_tinymce_plugin {
     /** @var array list of buttons defined by this plugin */
-    protected $buttons = array('poodll');
+    protected $buttons = array('poodllaudiomp3','poodllaudiored5','poodllvideo','poodllwhiteboard','poodllsnapshot');
 
     protected function update_init_params(array &$params, context $context,
             array $options = null) {
@@ -47,8 +47,20 @@ class tinymce_poodll extends editor_tinymce_plugin {
 		// Supply a text parameter to JS
 		$params['poodll_yesnoparam'] = "The admin said:" . $yesno;
 		
-        // Add button after 'unlink' in advancedbuttons3.
-        $this->add_button_after($params, 3, 'poodll', 'unlink');
+		$allowedroles = $this->get_config('allowedroles');
+	
+		//add icons to editor if the permissions are all ok
+		$recorders = array('audiomp3','audiored5','video','whiteboard','snapshot');
+		$allowedrecorders =  $this->get_config('recorderstoshow');
+		if(!empty($allowedrecorders)){
+			$allowedrecorders = explode(',',$allowedrecorders);
+			foreach($recorders as $recorder){
+				if((array_search('show_' . $recorder,$allowedrecorders)!==false) && has_capability('tinymce/poodll:allow' . $recorder, $context)){
+					$this->add_button_after($params, 3, 'poodll' . $recorder, 'unlink');
+				}
+			}
+		}
+
 
         // Add JS file, which uses default name.
         $this->add_js_plugin($params);

@@ -36,6 +36,61 @@ $capabilities = array(
 			'student' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         )
+    ),
+    'tinymce/poodll:allowaudiomp3' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+			'coursecreator' => CAP_ALLOW,
+			'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+			'student' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
+    'tinymce/poodll:allowaudiored5' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+			'coursecreator' => CAP_ALLOW,
+			'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+			'student' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
+    'tinymce/poodll:allowvideo' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+			'coursecreator' => CAP_ALLOW,
+			'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+			'student' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
+    'tinymce/poodll:allowwhiteboard' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+			'coursecreator' => CAP_ALLOW,
+			'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+			'student' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
+    'tinymce/poodll:allowsnapshot' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+			'coursecreator' => CAP_ALLOW,
+			'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+			'student' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
     )
 );
 
