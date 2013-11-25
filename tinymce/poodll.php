@@ -39,7 +39,7 @@ require_once($CFG->dirroot . '/filter/poodll/poodllresourcelib.php');
 require_once($CFG->dirroot.'/repository/lib.php');
 
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url('/lib/editor/tinymce/plugins/poodllrecording/poodllrecording.php');
+$PAGE->set_url('/lib/editor/tinymce/plugins/poodll/tinymce/poodll.php');
 
 if (isset($SESSION->lang)) {
     // Language is set via page url param.
@@ -50,7 +50,7 @@ if (isset($SESSION->lang)) {
 
 require_login();  // CONTEXT_SYSTEM level.
 $editor = get_texteditor('tinymce');
-$plugin = $editor->get_plugin('poodllrecording');
+$plugin = $editor->get_plugin('poodll');
 $itemid = optional_param('itemid', '', PARAM_TEXT);
 $recorder = optional_param('recorder', '', PARAM_TEXT);
 @header('Content-Type: text/html; charset=utf-8');
@@ -60,9 +60,9 @@ $recorder = optional_param('recorder', '', PARAM_TEXT);
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title><?php print_string('title', 'tinymce_poodllrecording')?></title>
+<title><?php print_string('title', 'tinymce_poodll')?></title>
 <script type="text/javascript" src="<?php echo $editor->get_tinymce_base_url(); ?>tiny_mce_popup.js"></script>
-<script type="text/javascript" src="<?php echo $plugin->get_tinymce_file_url('js/poodllrecording.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo $plugin->get_tinymce_file_url('js/poodll.js'); ?>"></script>
 
 </head>
 <body>
@@ -83,7 +83,7 @@ switch($recorder){
  	echo fetchSnapshotCameraForSubmission($updatecontrol, "apic.jpg",350,400,$usercontextid,'user','draft',$itemid);
  	break;
  case 'whiteboard':
- 	echo fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid);
+ 	echo fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350);
  	break;
  case 'audiored5':
  	echo fetchAudioRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid);
@@ -101,7 +101,7 @@ switch($recorder){
       <input type="hidden" name="contextid" value= "<?php echo $usercontextid;?>" id="context_id" />
       <input type="hidden" name= "wwwroot" value="<?php echo $CFG->wwwroot;?>" id="wwwroot" />
       <p id="messageAlert">After you have finished recording, press Insert.</p>
-      <input type="button" id="insert" name="insert" value="{#insert}" onclick="poodllrecordingDialog.insert(<?php echo $USER->id; ?>);" />
+      <input type="button" id="insert" name="insert" value="{#insert}" onclick="tinymce_poodll_Dialog.insert('<?php echo $recorder; ?>','<?php echo $updatecontrol; ?>');" />
       <input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
       <input type="hidden" name="action" value="download">
    </div>

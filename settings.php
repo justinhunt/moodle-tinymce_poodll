@@ -25,17 +25,9 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-
-   $options = array('0' => get_string('no', 'tinymce_poodll'),
-			'1' => get_string('yes', 'tinymce_poodll'));
-
-				
-	$settings->add(new admin_setting_configselect('tinymce_poodll/yesorno',
-					   get_string('selectyesno', 'tinymce_poodll'),
-					   get_string('selectyesnodetails', 'tinymce_poodll'), 0,$options));
 	  
 
-		// Role settings
+	// Recorder settings
 	$recoptions = array('show_audiomp3' => new lang_string('show_audiomp3', 'tinymce_poodll'),
 					'show_audiored5' => new lang_string('show_audiored5', 'tinymce_poodll'),
 					'show_video' => new lang_string('show_video', 'tinymce_poodll'),

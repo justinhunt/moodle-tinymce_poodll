@@ -32,6 +32,7 @@ $string['poodll:audiored5_desc'] = 'Record Audio';
 $string['poodll:video_desc'] = 'Record Video';
 $string['poodll:whiteboard_desc'] = 'Draw a Picture';
 $string['poodll:snapshot_desc'] = 'Take a Picture';
+$string['title'] = 'Create media file';
 $string['show_audiomp3'] = 'Show MP3 recorder';
 $string['show_audiored5'] = 'Show Audio recorder(red5)';
 $string['show_video'] = 'Show Video recorder';
@@ -39,7 +40,3 @@ $string['show_whiteboard'] = 'Show Whiteboard';
 $string['show_snapshot'] = 'Show Snapshot';
 $string['recorderstoshow'] = 'Recorders to show';
 $string['recorderstoshowdetails'] = '';
-
-$string['selectyesnodetails'] = 'A simple option to show how to get data from admin settings all the way down to javascript.';
-$string['yes'] = 'Yes';
-$string['no'] = 'No';

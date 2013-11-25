@@ -37,17 +37,6 @@ class tinymce_poodll extends editor_tinymce_plugin {
 		if(!has_capability('tinymce/poodll:visible', $context) ){
 			return;
 		 }
-		 
-		 if($this->get_config('yesorno')=='0'){
-			$yesno = 'No.';
-		 }else{
-			$yesno = 'Yes.';
-		 }
-
-		// Supply a text parameter to JS
-		$params['poodll_yesnoparam'] = "The admin said:" . $yesno;
-		
-		$allowedroles = $this->get_config('allowedroles');
 	
 		//add icons to editor if the permissions are all ok
 		$recorders = array('audiomp3','audiored5','video','whiteboard','snapshot');
