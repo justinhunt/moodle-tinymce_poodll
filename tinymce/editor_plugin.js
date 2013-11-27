@@ -31,7 +31,7 @@
             /** end **/
 			
 			var recorders = Array('audiomp3','audiored5','video', 'whiteboard','snapshot');
-			var widths = Array(500,500,420,620,420);
+			var widths = Array(400,400,380,620,380);
 			var heights = Array(310,310,480,480,480);
 			
 			for (var therecorder = 0; therecorder < recorders.length; therecorder++) {
