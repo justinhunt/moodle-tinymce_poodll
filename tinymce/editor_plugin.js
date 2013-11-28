@@ -13,22 +13,16 @@
 		init : function(ed, url) {
 			this.editor = ed;
 			
-			 /** Borrowed from Wan's mod */
-            var formtextareaid = tinyMCE.activeEditor.id.substr(3);
-            var itemidname = '';
-            var formtextareatmp = formtextareaid.split("_");
-            if (formtextareatmp.length == 2 && !isNaN(formtextareatmp[1])) {
-                itemidname = formtextareatmp[0] + '[' + formtextareatmp[1] + '][itemid]';
-            }
-            else {
-                itemidname = formtextareaid + '[itemid]';
-            }
-            var itemid = window.top.document.getElementsByName(itemidname).item(0);
-            if (itemid!=null)
-            {
-                itemid = itemid.value;
-            }
-            /** end **/
+			//this logic needs to be centralised, currently in poodll.js too
+			var itemid = this.getsimpleitemid();
+			if(!itemid){
+				itemid=this.getcomplexitemid();
+        	}
+        	if(itemid){
+        		itemid = itemid.value;
+        	}else{
+        		itemid =0;
+        	}
 			
 			var recorders = Array('audiomp3','audiored5','video', 'whiteboard','snapshot');
 			var widths = Array(400,400,380,620,380);
@@ -65,6 +59,27 @@
 
 		
 		},
+	
+	getsimpleitemid : function(){
+        var formtextareaid = tinyMCE.activeEditor.id;
+        var formtextareaname = formtextareaid.substr(0,formtextareaid.length-3);
+        var itemidname =  formtextareaname + ':itemid';
+        var itemid = window.top.document.getElementsByName(itemidname).item(0);
+        return itemid;
+	},
+	
+	getcomplexitemid : function(){
+			var formtextareaid = tinyMCE.activeEditor.id.substr(3);
+			var formtextareatmp = formtextareaid.split("_");
+			if (formtextareatmp.length == 2 && !isNaN(formtextareatmp[1])) {
+			   var itemidname = formtextareatmp[0] + '[' + formtextareatmp[1] + '][itemid]';
+			}
+			else {
+			   var itemidname = formtextareaid + '[itemid]';   
+			}
+			var itemid = window.top.document.getElementsByName(itemidname).item(0);
+			return itemid;
+	},
 
 		getInfo : function() {
 			return {

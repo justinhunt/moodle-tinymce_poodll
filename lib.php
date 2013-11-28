@@ -37,6 +37,11 @@ class tinymce_poodll extends editor_tinymce_plugin {
 		if(!has_capability('tinymce/poodll:visible', $context) ){
 			return;
 		 }
+		 
+		 //if this textarea allows no files, we also bail
+		 if (!isset($options['maxfiles']) || $options['maxfiles'] == 0) {
+                return;
+        }
 	
 		//add icons to editor if the permissions are all ok
 		$recorders = array('audiomp3','audiored5','video','whiteboard','snapshot');

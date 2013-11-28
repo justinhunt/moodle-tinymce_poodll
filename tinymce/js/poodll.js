@@ -10,21 +10,17 @@ var tinymce_poodll_Dialog = {
 	},
 
 	insert : function(recorder,filename) {
-		var message = document.getElementById("messageAlert");
-        var formtextareaid = tinyMCE.activeEditor.id.substr(3);
-        var itemidname = '';
-        var formtextareatmp = formtextareaid.split("_");
-        if (formtextareatmp.length == 2 && !isNaN(formtextareatmp[1])) {
-            itemidname = formtextareatmp[0] + '[' + formtextareatmp[1] + '][itemid]';
+		//there must be a better way than this to get itemid
+		var itemid = this.getsimpleitemid();
+		if(!itemid){
+			itemid=this.getcomplexitemid();
         }
-        else {
-            itemidname = formtextareaid + '[itemid]';
-        }
-        var itemid = window.top.document.getElementsByName(itemidname).item(0);
+        
         var contextid = document.getElementById('context_id');
         var thefilename = document.getElementById(filename);
         var wwwroot = document.getElementById('wwwroot');
-        if (itemidname) {
+
+        if (itemid) {
            itemid = itemid.value;
            contextid = contextid.value;
            thefilename = thefilename.value;
@@ -32,7 +28,6 @@ var tinymce_poodll_Dialog = {
            
 		   // It will store in mdl_question with the "@@PLUGINFILE@@/myfile.mp3" for the filepath.
 		   var filesrc =wwwroot+'/draftfile.php/'+contextid+'/user/draft/'+itemid+'/'+thefilename;
-			
 			//if image file, don't insert link, insert image
 		   if(recorder=='snapshot' ||recorder=='whiteboard'){
 				this.insertimage(filesrc);
@@ -45,6 +40,28 @@ var tinymce_poodll_Dialog = {
         }
         tinyMCEPopup.restoreSelection();
         tinyMCEPopup.close();
+	},
+	
+	getsimpleitemid : function(){
+
+        var formtextareaid = tinyMCE.activeEditor.id;
+        var formtextareaname = formtextareaid.substr(0,formtextareaid.length-3);
+        var itemidname =  formtextareaname + ':itemid';
+        var itemid = window.top.document.getElementsByName(itemidname).item(0);
+        return itemid;
+	},
+	
+	getcomplexitemid : function(){
+			var formtextareaid = tinyMCE.activeEditor.id.substr(3);
+			var formtextareatmp = formtextareaid.split("_");
+			if (formtextareatmp.length == 2 && !isNaN(formtextareatmp[1])) {
+			   var itemidname = formtextareatmp[0] + '[' + formtextareatmp[1] + '][itemid]';
+			}
+			else {
+			   var itemidname = formtextareaid + '[itemid]';   
+			}
+			var itemid = window.top.document.getElementsByName(itemidname).item(0);
+			return itemid;
 	},
 
 	insertimage : function(imgsrc) {
