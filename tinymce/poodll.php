@@ -69,7 +69,7 @@ $recorder = optional_param('recorder', '', PARAM_TEXT);
 <div style="text-align: center;">
 <?php
 echo "<script type=\"text/javascript\" src=\"{$CFG->wwwroot}/filter/poodll/flash/embed-compressed.js\"></script> ";
-$usercontextid=get_context_instance(CONTEXT_USER, $USER->id)->id;
+$usercontextid=context_user::instance($USER->id)->id;
 
 //$updatecontrol
 $updatecontrol = 'myfilename';
