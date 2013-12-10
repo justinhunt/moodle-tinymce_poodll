@@ -101,7 +101,7 @@ switch($recorder){
       <input type="hidden" name="contextid" value= "<?php echo $usercontextid;?>" id="context_id" />
       <input type="hidden" name= "wwwroot" value="<?php echo $CFG->wwwroot;?>" id="wwwroot" />
       <p id="messageAlert">After you have finished recording, press Insert.</p>
-      <input type="button" id="insert" name="insert" value="{#insert}" onclick="tinymce_poodll_Dialog.insert('<?php echo $recorder; ?>','<?php echo $updatecontrol; ?>');" />
+      <input type="button" id="insert" name="insert" value="{#insert}" onclick="tinymce_poodll_Dialog.insert('<?php echo $recorder; ?>','<?php echo $updatecontrol; ?>');" />  
       <input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
       <input type="hidden" name="action" value="download">
    </div>

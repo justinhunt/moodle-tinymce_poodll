@@ -32,6 +32,7 @@ $string['poodll:audiored5_desc'] = 'Record Audio';
 $string['poodll:video_desc'] = 'Record Video';
 $string['poodll:whiteboard_desc'] = 'Draw a Picture';
 $string['poodll:snapshot_desc'] = 'Take a Picture';
+$string['poodll:nothingtoinsert'] = 'Nothing to insert!';
 $string['title'] = 'Create media file';
 $string['show_audiomp3'] = 'Show MP3 recorder';
 $string['show_audiored5'] = 'Show Audio recorder(red5)';

@@ -19,6 +19,11 @@ var tinymce_poodll_Dialog = {
         var contextid = document.getElementById('context_id');
         var thefilename = document.getElementById(filename);
         var wwwroot = document.getElementById('wwwroot');
+        //if no file is there to insert, don't do it
+        if(!thefilename.value){
+        	alert(tinyMCEPopup.getLang('poodll.nothingtoinsert'));
+        	return;
+        }
 
         if (itemid) {
            itemid = itemid.value;
@@ -42,8 +47,12 @@ var tinymce_poodll_Dialog = {
         tinyMCEPopup.close();
 	},
 	
+	enableinsert: function(){
+		var insertbutton = document.getElementById('insert');
+		insertbutton.disabled = false;
+	},
+	
 	getsimpleitemid : function(){
-
         var formtextareaid = tinyMCE.activeEditor.id;
         var formtextareaname = formtextareaid.substr(0,formtextareaid.length-3);
         var itemidname =  formtextareaname + ':itemid';
