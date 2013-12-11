@@ -23,8 +23,8 @@
  *
  * This plugin need to use together with Poodll filter.
  *
- * @package    poodllrecording
- * @subpackage tinymce_poodllrecording
+ * @package    poodll
+ * @subpackage tinymce_poodll
  * @copyright  2013 UC Regents
  * @copyright  2013 Justin Hunt  {@link http://www.poodll.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -36,7 +36,7 @@ define('NO_MOODLE_COOKIES', false);
 
 require('../../../../../../config.php');
 require_once($CFG->dirroot . '/filter/poodll/poodllresourcelib.php');
-require_once($CFG->dirroot.'/repository/lib.php');
+//require_once($CFG->dirroot.'/repository/lib.php');
 
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url('/lib/editor/tinymce/plugins/poodll/tinymce/poodll.php');
@@ -47,12 +47,13 @@ if (isset($SESSION->lang)) {
 } else {
     $lang = 'en';
 }
-
 require_login();  // CONTEXT_SYSTEM level.
 $editor = get_texteditor('tinymce');
 $plugin = $editor->get_plugin('poodll');
 $itemid = optional_param('itemid', '', PARAM_TEXT);
 $recorder = optional_param('recorder', '', PARAM_TEXT);
+
+/*
 @header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -65,10 +66,9 @@ $recorder = optional_param('recorder', '', PARAM_TEXT);
 <script type="text/javascript" src="<?php echo $plugin->get_tinymce_file_url('js/poodll.js'); ?>"></script>
 
 </head>
-<body>
-<div style="text-align: center;">
-<?php
-echo "<script type=\"text/javascript\" src=\"{$CFG->wwwroot}/filter/poodll/flash/embed-compressed.js\"></script> ";
+*/
+
+//contextid
 $usercontextid=context_user::instance($USER->id)->id;
 
 //$updatecontrol
@@ -77,21 +77,35 @@ $updatecontrol = 'myfilename';
 // Load the recorder.
 switch($recorder){
  case 'video':
- 	echo fetchVideoRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid);
+ 	$recorderhtml =  fetchVideoRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid);
  	break;
  case 'snapshot':
- 	echo fetchSnapshotCameraForSubmission($updatecontrol, "apic.jpg",350,400,$usercontextid,'user','draft',$itemid);
+ 	$recorderhtml =  fetchSnapshotCameraForSubmission($updatecontrol, "apic.jpg",350,400,$usercontextid,'user','draft',$itemid);
  	break;
  case 'whiteboard':
- 	echo fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350);
+ 	$recorderhtml =  fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350);
  	break;
  case 'audiored5':
- 	echo fetchAudioRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid);
+ 	$recorderhtml =  fetchAudioRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid);
  	break; 		
  case 'audiomp3':
  default:
-	echo fetchMP3RecorderForSubmission($updatecontrol, $usercontextid ,'user','draft',$itemid);
+	$recorderhtml =  fetchMP3RecorderForSubmission($updatecontrol, $usercontextid ,'user','draft',$itemid);
 }
+
+$PAGE->set_pagelayout('popup');
+$PAGE->set_title(get_string('title', 'tinymce_poodll'));
+$PAGE->set_heading('');
+$PAGE->requires->js(new moodle_url($editor->get_tinymce_base_url() . 'tiny_mce_popup.js'),true);
+$PAGE->requires->js(new moodle_url($plugin->get_tinymce_file_url. 'js/poodll.js'),true);
+echo $OUTPUT->header();
+?>
+
+
+<div style="text-align: center;">
+<?php
+
+echo $recorderhtml;
 
 ?>
 </div>
@@ -106,5 +120,5 @@ switch($recorder){
       <input type="hidden" name="action" value="download">
    </div>
 </form>
-</body>
-</html>
+<?php
+echo $OUTPUT->footer();
