@@ -36,7 +36,6 @@ define('NO_MOODLE_COOKIES', false);
 
 require('../../../../../../config.php');
 require_once($CFG->dirroot . '/filter/poodll/poodllresourcelib.php');
-//require_once($CFG->dirroot.'/repository/lib.php');
 
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url('/lib/editor/tinymce/plugins/poodll/tinymce/poodll.php');
@@ -53,56 +52,49 @@ $plugin = $editor->get_plugin('poodll');
 $itemid = optional_param('itemid', '', PARAM_TEXT);
 $recorder = optional_param('recorder', '', PARAM_TEXT);
 
-/*
-@header('Content-Type: text/html; charset=utf-8');
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title><?php print_string('title', 'tinymce_poodll')?></title>
-<script type="text/javascript" src="<?php echo $editor->get_tinymce_base_url(); ?>tiny_mce_popup.js"></script>
-<script type="text/javascript" src="<?php echo $plugin->get_tinymce_file_url('js/poodll.js'); ?>"></script>
 
-</head>
-*/
 
 //contextid
 $usercontextid=context_user::instance($USER->id)->id;
 
 //$updatecontrol
 $updatecontrol = 'myfilename';
+$callbackjs = 'tinymce_poodll_Dialog.updatefilename';
 
 // Load the recorder.
 switch($recorder){
  case 'video':
- 	$recorderhtml =  fetchVideoRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid);
+ 	$recorderhtml =  fetchVideoRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid,0,$callbackjs);
  	break;
  case 'snapshot':
- 	$recorderhtml =  fetchSnapshotCameraForSubmission($updatecontrol, "apic.jpg",350,400,$usercontextid,'user','draft',$itemid);
+ 	$recorderhtml =  fetchSnapshotCameraForSubmission($updatecontrol, "apic.jpg",350,400,$usercontextid,'user','draft',$itemid,$callbackjs);
  	break;
  case 'whiteboard':
- 	$recorderhtml =  fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350);
+ 	$recorderhtml =  fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350,"","",$callbackjs);
+	$recorderhtml = "<div class='jswhiteboard'>" . $recorderhtml . "</div>"; 
  	break;
  case 'audiored5':
- 	$recorderhtml =  fetchAudioRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid);
+ 	$recorderhtml =  fetchAudioRecorderForSubmission('auto', 'none', $updatecontrol, 
+				$usercontextid,'user','draft',$itemid,0,$callbackjs);
  	break; 		
  case 'audiomp3':
  default:
-	$recorderhtml =  fetchMP3RecorderForSubmission($updatecontrol, $usercontextid ,'user','draft',$itemid);
+	$recorderhtml =  fetchMP3RecorderForSubmission($updatecontrol, $usercontextid ,'user','draft',$itemid,0,$callbackjs);
 }
 
 $PAGE->set_pagelayout('popup');
 $PAGE->set_title(get_string('title', 'tinymce_poodll'));
-$PAGE->set_heading('');
+//$PAGE->set_heading('');
 $PAGE->requires->js(new moodle_url($editor->get_tinymce_base_url() . 'tiny_mce_popup.js'),true);
 $PAGE->requires->js(new moodle_url($plugin->get_tinymce_file_url. 'js/poodll.js'),true);
+$PAGE->requires->js(new moodle_url($CFG->httpswwroot. '/filter/poodll/module.js'),true);
+
 echo $OUTPUT->header();
 ?>
 
 
 <div style="text-align: center;">
+<p id="messageAlert"><?php echo get_string('dopressinsert', 'tinymce_poodll'); ?></p>
 <?php
 
 echo $recorderhtml;
@@ -114,8 +106,7 @@ echo $recorderhtml;
       <input id="<?php echo $updatecontrol; ?>" type="hidden" name="<?php echo $updatecontrol; ?>" />
       <input type="hidden" name="contextid" value= "<?php echo $usercontextid;?>" id="context_id" />
       <input type="hidden" name= "wwwroot" value="<?php echo $CFG->wwwroot;?>" id="wwwroot" />
-      <p id="messageAlert">After you have finished recording, press Insert.</p>
-      <input type="button" id="insert" name="insert" value="{#insert}" onclick="tinymce_poodll_Dialog.insert('<?php echo $recorder; ?>','<?php echo $updatecontrol; ?>');" />  
+      <input type="button" id="insert" name="insert" disabled="true" value="{#insert}" onclick="tinymce_poodll_Dialog.insert('<?php echo $recorder; ?>','<?php echo $updatecontrol; ?>');" />  
       <input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
       <input type="hidden" name="action" value="download">
    </div>

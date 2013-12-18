@@ -130,6 +130,19 @@ var tinymce_poodll_Dialog = {
 		el.style.width  = (vp.w - 20) + 'px';
 		el.style.height = (vp.h - 90) + 'px';
 		*/
+	},
+	// Called by PoodLL recorders to update filename field on page
+	updatefilename : function(args) {
+		//record the url on the html page,							
+		var filenamecontrol = document.getElementById(args[3]);
+		if(filenamecontrol==null){ filenamecontrol = parent.document.getElementById(args[3]);} 			
+		if(filenamecontrol){
+			filenamecontrol.value = args[2];
+			var insertbutton = document.getElementById('insert');
+			insertbutton.disabled = false;
+		}
+		
+		console.log("just  updated: " + args[3] + ' with ' + args[2]);
 	}
 };
 
