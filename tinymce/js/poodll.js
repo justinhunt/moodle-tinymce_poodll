@@ -6,7 +6,6 @@ tinyMCEPopup.requireLangPack();
 var tinymce_poodll_Dialog = {
 	init : function() {
 		this.resize();
-		 //document.getElementById('poodll_container').innerHTML = get_poodll_yesno();
 	},
 
 	insert : function(recorder,filename) {
@@ -124,12 +123,14 @@ var tinymce_poodll_Dialog = {
 	},
 	resize : function() {
 		var vp = tinyMCEPopup.dom.getViewPort(window), el;
-		/* donothing
+		/* donothing */
 		el = document.getElementById('content');
 
 		el.style.width  = (vp.w - 20) + 'px';
 		el.style.height = (vp.h - 90) + 'px';
-		*/
+		//console.log('vp/w:' + vp.w);
+		//console.log('vp/h:' + vp.h);
+		
 	},
 	// Called by PoodLL recorders to update filename field on page
 	updatefilename : function(args) {
@@ -142,7 +143,7 @@ var tinymce_poodll_Dialog = {
 			insertbutton.disabled = false;
 		}
 		
-		console.log("just  updated: " + args[3] + ' with ' + args[2]);
+		//console.log("just  updated: " + args[3] + ' with ' + args[2]);
 	}
 };
 

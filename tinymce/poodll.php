@@ -65,40 +65,43 @@ $callbackjs = 'tinymce_poodll_Dialog.updatefilename';
 switch($recorder){
  case 'video':
  	$recorderhtml =  fetchVideoRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid,0,$callbackjs);
+	$instruction = get_string('recordtheninsert', 'tinymce_poodll');
  	break;
  case 'snapshot':
  	$recorderhtml =  fetchSnapshotCameraForSubmission($updatecontrol, "apic.jpg",350,400,$usercontextid,'user','draft',$itemid,$callbackjs);
+	$instruction = get_string('snaptheninsert', 'tinymce_poodll');
  	break;
  case 'whiteboard':
  	$recorderhtml =  fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350,"","",$callbackjs);
 	$recorderhtml = "<div class='jswhiteboard'>" . $recorderhtml . "</div>"; 
+	$instruction = get_string('drawtheninsert', 'tinymce_poodll');
  	break;
  case 'audiored5':
  	$recorderhtml =  fetchAudioRecorderForSubmission('auto', 'none', $updatecontrol, 
 				$usercontextid,'user','draft',$itemid,0,$callbackjs);
+	$instruction = get_string('recordtheninsert', 'tinymce_poodll');
  	break; 		
  case 'audiomp3':
  default:
 	$recorderhtml =  fetchMP3RecorderForSubmission($updatecontrol, $usercontextid ,'user','draft',$itemid,0,$callbackjs);
+	$instruction = get_string('recordtheninsert', 'tinymce_poodll');
 }
 
-$PAGE->set_pagelayout('popup');
+$PAGE->set_pagelayout('embedded');
 $PAGE->set_title(get_string('title', 'tinymce_poodll'));
 //$PAGE->set_heading('');
+$PAGE->requires->css(new moodle_url($CFG->wwwroot . '/lib/editor/tinymce/plugins/poodll/tinymce/css/poodll.css'));
 $PAGE->requires->js(new moodle_url($editor->get_tinymce_base_url() . 'tiny_mce_popup.js'),true);
 $PAGE->requires->js(new moodle_url($plugin->get_tinymce_file_url. 'js/poodll.js'),true);
 $PAGE->requires->js(new moodle_url($CFG->httpswwroot. '/filter/poodll/module.js'),true);
 
+
 echo $OUTPUT->header();
 ?>
-
-
 <div style="text-align: center;">
-<p id="messageAlert"><?php echo get_string('dopressinsert', 'tinymce_poodll'); ?></p>
+<p id="messageAlert"><?php echo $instruction; ?></p>
 <?php
-
 echo $recorderhtml;
-
 ?>
 </div>
 <form>

@@ -6,3 +6,5 @@
 #popupwidth, #popupheight, #popupleft, #popuptop {width:30px;vertical-align:middle;text-align:center;}
 #id, #style, #classes, #target, #dir, #hreflang, #lang, #charset, #type, #rel, #rev, #tabindex, #accesskey {width:200px;}
 #events_panel input {width:200px;}
+.pagelayout-embedded #content {padding-top: 0px;}
+#content {width:0px;height:0px;} 

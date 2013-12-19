@@ -50,7 +50,7 @@ class tinymce_poodll extends editor_tinymce_plugin {
 			$allowedrecorders = explode(',',$allowedrecorders);
 			foreach($recorders as $recorder){
 				if((array_search('show_' . $recorder,$allowedrecorders)!==false) && has_capability('tinymce/poodll:allow' . $recorder, $context)){
-					$this->add_button_after($params, 3, 'poodll' . $recorder, 'unlink');
+					$this->add_button_after($params, 3, 'poodll' . $recorder, 'image');
 				}
 			}
 		}
