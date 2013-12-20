@@ -92,8 +92,8 @@ $PAGE->set_title(get_string('title', 'tinymce_poodll'));
 //$PAGE->set_heading('');
 $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/lib/editor/tinymce/plugins/poodll/tinymce/css/poodll.css'));
 $PAGE->requires->js(new moodle_url($editor->get_tinymce_base_url() . 'tiny_mce_popup.js'),true);
-$PAGE->requires->js(new moodle_url($plugin->get_tinymce_file_url. 'js/poodll.js'),true);
-$PAGE->requires->js(new moodle_url($CFG->httpswwroot. '/filter/poodll/module.js'),true);
+$PAGE->requires->js(new moodle_url($CFG->wwwroot . '/lib/editor/tinymce/plugins/poodll/tinymce/js/poodll.js'),true);
+$PAGE->requires->js(new moodle_url($CFG->wwwroot. '/filter/poodll/module.js'),true);
 
 
 echo $OUTPUT->header();
