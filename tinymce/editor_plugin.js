@@ -45,13 +45,19 @@
 						}
 					}(recorders[therecorder],widths[therecorder],heights[therecorder])
 				);
+				
+				//add buttons only if NOT in full screen mode
+				if(document.getElementById("mce_fullscreen_container")===null){
+					// Register buttons
+					ed.addButton('poodll'+recorders[therecorder] ,{
+						title : 'poodll.' + recorders[therecorder] + '_desc',
+						cmd : 'mcepoodll' + recorders[therecorder],
+						image: url + '/img/' + recorders[therecorder] + '_icon.png'
+					});
+				}
+				
 
-				// Register buttons
-				ed.addButton('poodll'+recorders[therecorder] ,{
-					title : 'poodll.' + recorders[therecorder] + '_desc',
-					cmd : 'mcepoodll' + recorders[therecorder],
-					image: url + '/img/' + recorders[therecorder] + '_icon.png'
-				});
+            
 				//you could add a shortcut here
 				//ed.addShortcut('ctrl+k', 'poodll.poodll_desc', 'mcepoodll');
 			
