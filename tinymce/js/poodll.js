@@ -123,11 +123,11 @@ var tinymce_poodll_Dialog = {
 	},
 	resize : function() {
 		var vp = tinyMCEPopup.dom.getViewPort(window), el;
-		/* donothing */
+		/* donothing 
 		el = document.getElementById('content');
-
 		el.style.width  = (vp.w - 20) + 'px';
 		el.style.height = (vp.h - 90) + 'px';
+		*/
 		//console.log('vp/w:' + vp.w);
 		//console.log('vp/h:' + vp.h);
 		

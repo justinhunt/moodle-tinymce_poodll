@@ -98,6 +98,7 @@ $PAGE->requires->js(new moodle_url($CFG->wwwroot. '/filter/poodll/module.js'),tr
 
 echo $OUTPUT->header();
 ?>
+<div id="tinymce_poodll_container">
 <div style="text-align: center;">
 <p id="messageAlert"><?php echo $instruction; ?></p>
 <?php
@@ -114,5 +115,6 @@ echo $recorderhtml;
       <input type="hidden" name="action" value="download">
    </div>
 </form>
+</div>
 <?php
 echo $OUTPUT->footer();
