@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'PoodLL Anywhere';
+$string['pluginname'] = 'PoodLL Anywhere(TinyMCE)';
 
 /* All lang strings used from TinyMCE JavaScript code must be named 'pluginname:stringname'.*/
 $string['poodll:desc'] = 'PoodLL Anywhere';

@@ -25,13 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 // The current plugin version (Date: YYYYMMDDXX).
-$plugin->version   = 2014012290;
+$plugin->version   = 2014050100;
 // Required Moodle version.
 $plugin->requires  = 2012112900;
 // Component Name - Moodle uses this as unique id for plugin
 $plugin->component = 'tinymce_poodll';
 //beta
-$plugin->maturity  = MATURITY_BETA;
+$plugin->maturity  = MATURITY_STABLE;
 // Human readable version informatiomn
-$plugin->release   = '1.0.4 (Build 2014012900)';
+$plugin->release   = '1.0.5 (Build 2014050100)';
 $plugin->dependencies = array('filter_poodll' => 2014011500);
