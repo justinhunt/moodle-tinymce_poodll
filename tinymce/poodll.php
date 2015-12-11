@@ -35,7 +35,6 @@
 define('NO_MOODLE_COOKIES', false);
 
 require('../../../../../../config.php');
-require_once($CFG->dirroot . '/filter/poodll/poodllresourcelib.php');
 
 $PAGE->set_context(context_system::instance());
 $PAGE->set_url('/lib/editor/tinymce/plugins/poodll/tinymce/poodll.php');
@@ -64,26 +63,26 @@ $callbackjs = 'tinymce_poodll_Dialog.updatefilename';
 // Load the recorder.
 switch($recorder){
  case 'video':
- 	$recorderhtml =  fetchVideoRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid,0,$callbackjs);
+ 	$recorderhtml =  \filter_poodll\poodlltools::fetchVideoRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid,0,$callbackjs);
 	$instruction = get_string('recordtheninsert', 'tinymce_poodll');
  	break;
  case 'snapshot':
- 	$recorderhtml =  fetchSnapshotCameraForSubmission($updatecontrol, "apic.jpg",350,400,$usercontextid,'user','draft',$itemid,$callbackjs);
+ 	$recorderhtml =  \filter_poodll\poodlltools::fetchSnapshotCameraforSubmission($updatecontrol, "apic.jpg",350,400,$usercontextid,'user','draft',$itemid,$callbackjs);
 	$instruction = get_string('snaptheninsert', 'tinymce_poodll');
  	break;
  case 'whiteboard':
- 	$recorderhtml =  fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350,"","",$callbackjs);
+ 	$recorderhtml =  \filter_poodll\poodlltools::fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350,"","",$callbackjs);
 	$recorderhtml = "<div class='jswhiteboard'>" . $recorderhtml . "</div>"; 
 	$instruction = get_string('drawtheninsert', 'tinymce_poodll');
  	break;
  case 'audiored5':
- 	$recorderhtml =  fetchAudioRecorderForSubmission('auto', 'none', $updatecontrol, 
+ 	$recorderhtml =  \filter_poodll\poodlltools::fetchAudioRecorderForSubmission('auto', 'none', $updatecontrol,
 				$usercontextid,'user','draft',$itemid,0,$callbackjs);
 	$instruction = get_string('recordtheninsert', 'tinymce_poodll');
  	break; 		
  case 'audiomp3':
  default:
-	$recorderhtml =  fetchMP3RecorderForSubmission($updatecontrol, $usercontextid ,'user','draft',$itemid,0,$callbackjs);
+	$recorderhtml =  \filter_poodll\poodlltools::fetchMP3RecorderForSubmission($updatecontrol, $usercontextid ,'user','draft',$itemid,0,$callbackjs);
 	$instruction = get_string('recordtheninsert', 'tinymce_poodll');
 }
 
