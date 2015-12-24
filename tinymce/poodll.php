@@ -93,6 +93,7 @@ $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/lib/editor/tinymce/plugins
 $PAGE->requires->js(new moodle_url($editor->get_tinymce_base_url() . 'tiny_mce_popup.js'),true);
 $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/lib/editor/tinymce/plugins/poodll/tinymce/js/poodll.js'),true);
 $PAGE->requires->js(new moodle_url($CFG->wwwroot. '/filter/poodll/module.js'),true);
+$PAGE->requires->jquery();
 
 
 echo $OUTPUT->header();
