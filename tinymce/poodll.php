@@ -71,7 +71,7 @@ switch($recorder){
 	$instruction = get_string('snaptheninsert', 'tinymce_poodll');
  	break;
  case 'whiteboard':
- 	$recorderhtml =  \filter_poodll\poodlltools::fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350,"","",$callbackjs);
+ 	$recorderhtml =  \filter_poodll\poodlltools::fetchWhiteboardForSubmission($updatecontrol, $usercontextid,'user','draft',$itemid,400,350,"","drawingboard",$callbackjs);
 	$recorderhtml = "<div class='jswhiteboard'>" . $recorderhtml . "</div>"; 
 	$instruction = get_string('drawtheninsert', 'tinymce_poodll');
  	break;
@@ -99,7 +99,7 @@ $PAGE->requires->jquery();
 echo $OUTPUT->header();
 ?>
 <div id="tinymce_poodll_container">
-<div style="text-align: center;">
+<div style="text-align: center;display: inline-block;">
 <p id="messageAlert"><?php echo $instruction; ?></p>
 <?php
 echo $recorderhtml;
