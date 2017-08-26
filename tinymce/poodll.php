@@ -59,15 +59,16 @@ $usercontextid=context_user::instance($USER->id)->id;
 //$updatecontrol
 $updatecontrol = 'myfilename';
 $callbackjs = 'tinymce_poodll_Dialog.updatefilename';
+$hints= new Array('size'=>'small');
 
 // Load the recorder.
 switch($recorder){
  case 'video':
- 	$recorderhtml =  \filter_poodll\poodlltools::fetchVideoRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid,0,$callbackjs);
+ 	$recorderhtml =  \filter_poodll\poodlltools::fetchVideoRecorderForSubmission('auto', 'none', $updatecontrol, $usercontextid,'user','draft',$itemid,0,$callbackjs, $hints);
 	$instruction = get_string('recordtheninsert', 'tinymce_poodll');
  	break;
  case 'snapshot':
-	$recorderhtml =  \filter_poodll\poodlltools::fetchHTML5SnapshotCamera($updatecontrol,350,400,$usercontextid,'user','draft',$itemid,$callbackjs);
+	$recorderhtml =  \filter_poodll\poodlltools::fetchHTML5SnapshotCamera($updatecontrol,350,400,$usercontextid,'user','draft',$itemid,$callbackjs,$hints);
 	$instruction = get_string('snaptheninsert', 'tinymce_poodll');
  	break;
  	break;
@@ -78,12 +79,12 @@ switch($recorder){
  	break;
  case 'audiored5':
  	$recorderhtml =  \filter_poodll\poodlltools::fetchAudioRecorderForSubmission('auto', 'none', $updatecontrol,
-				$usercontextid,'user','draft',$itemid,0,$callbackjs);
+				$usercontextid,'user','draft',$itemid,0,$callbackjs,$hints);
 	$instruction = get_string('recordtheninsert', 'tinymce_poodll');
  	break; 		
  case 'audiomp3':
  default:
-	$recorderhtml =  \filter_poodll\poodlltools::fetchMP3RecorderForSubmission($updatecontrol, $usercontextid ,'user','draft',$itemid,0,$callbackjs);
+	$recorderhtml =  \filter_poodll\poodlltools::fetchMP3RecorderForSubmission($updatecontrol, $usercontextid ,'user','draft',$itemid,0,$callbackjs,$hints);
 	$instruction = get_string('recordtheninsert', 'tinymce_poodll');
 }
 
