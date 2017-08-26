@@ -59,7 +59,7 @@ $usercontextid=context_user::instance($USER->id)->id;
 //$updatecontrol
 $updatecontrol = 'myfilename';
 $callbackjs = 'tinymce_poodll_Dialog.updatefilename';
-$hints= new Array('size'=>'small');
+$hints= Array('size'=>'small');
 
 // Load the recorder.
 switch($recorder){
