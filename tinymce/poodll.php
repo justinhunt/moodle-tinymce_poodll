@@ -50,19 +50,30 @@ $editor = get_texteditor('tinymce');
 $plugin = $editor->get_plugin('poodll');
 $itemid = optional_param('itemid', '', PARAM_TEXT);
 $recorder = optional_param('recorder', '', PARAM_TEXT);
+$coursecontextid = optional_param('coursecontextid', 0, PARAM_INT);
+$modulecontextid = optional_param('modulecontextid', 0, PARAM_INT);
 
-
-
-//contextid
-$usercontextid=context_user::instance($USER->id)->id;
-$coursecontextid=context_course::instance($COURSE->id)->id;
 
 //$updatecontrol
 $updatecontrol = 'myfilename';
 $callbackjs = 'tinymce_poodll_Dialog.updatefilename';
-$hints= Array('size'=>'small');
-$hints['coursecontextid'] = $coursecontextid;
 
+//hints are passed all the way to AMD recorder code
+$hints= Array('size'=>'small');
+
+//setting up contexts
+$usercontextid=context_user::instance($USER->id)->id;
+if(!$coursecontextid){
+	$coursecontextid=context_course::instance($COURSE->id)->id;
+}
+if($coursecontextid){
+   $hints['coursecontextid'] = $coursecontextid;
+}
+if($modulecontextid){
+	$hints['modulecontextid'] = $modulecontextid;
+ }
+ 
+ 
 // Load the recorder.
 switch($recorder){
  case 'video':

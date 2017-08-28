@@ -29,6 +29,23 @@
 //			var widths = Array('auto','auto','auto',620,380);
 			var heights = Array(310,310,500,530,500);
 			
+			//get contexts
+			var modulecontextid= 0;	
+			var coursecontextid= 0;	
+			if(M.editor_tinymce['filepicker_options']){
+				var options = M.editor_tinymce.filepicker_options;						
+				if (options.id_message && options.id_message.image) {
+					if (options.id_message.image.context && options.id_message.image.context.id) {
+						modulecontextid= options.id_message.image.context.id;	
+						var thepath = options.id_message.image.context.path.split('/');
+						if(thepath.length > 2){
+							coursecontextid= thepath[3];
+							//modulecontextid= thepath[4]; //should also work
+						}
+					}
+				}
+			}
+			
 			for (var therecorder = 0; therecorder < recorders.length; therecorder++) {
 
 				// Register commands
@@ -36,7 +53,8 @@
 					function(rec,wid,hei) {
 						return function(){
 							ed.windowManager.open({
-								file : ed.getParam("moodle_plugin_base") + 'poodll/tinymce/poodll.php?itemid='+itemid + '&recorder=' + rec,
+								file : ed.getParam("moodle_plugin_base") + 'poodll/tinymce/poodll.php?itemid='+itemid + 
+									'&recorder=' + rec + '&modulecontextid=' + modulecontextid + '&coursecontextid=' + coursecontextid,
 								width : wid,
 								height : hei,
 								inline : 1
