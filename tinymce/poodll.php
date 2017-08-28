@@ -55,11 +55,13 @@ $recorder = optional_param('recorder', '', PARAM_TEXT);
 
 //contextid
 $usercontextid=context_user::instance($USER->id)->id;
+$coursecontextid=context_course::instance($COURSE->id)->id;
 
 //$updatecontrol
 $updatecontrol = 'myfilename';
 $callbackjs = 'tinymce_poodll_Dialog.updatefilename';
 $hints= Array('size'=>'small');
+$hints['coursecontextid'] = $coursecontextid;
 
 // Load the recorder.
 switch($recorder){
