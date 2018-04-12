@@ -1,5 +1,9 @@
 Change List
 =========
+
+Version 3.1.0(Build 2018041000)
+-Implemented new Moodle Privacy API
+
 Version 2017020701
 Removed references to red5
 
