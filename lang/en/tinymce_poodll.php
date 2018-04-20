@@ -47,3 +47,4 @@ $string['show_whiteboard'] = 'Show Whiteboard';
 $string['show_snapshot'] = 'Show Snapshot';
 $string['recorderstoshow'] = 'Recorders to show';
 $string['recorderstoshowdetails'] = '';
+$string['privacy:metadata'] = 'The TinyMCE Poodll plugin does not store any personal data.';
